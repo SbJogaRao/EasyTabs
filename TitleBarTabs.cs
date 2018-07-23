@@ -714,7 +714,7 @@ namespace EasyTabs
 		/// </summary>
 		/// <param name="sender">Object from which this event originated (the <see cref="TitleBarTab" /> in this case).</param>
 		/// <param name="e">Arguments associated with the event.</param>
-		private void TitleBarTabs_Closing(object sender, CancelEventArgs e)
+		protected virtual void TitleBarTabs_Closing(object sender, CancelEventArgs e)
 		{
 			TitleBarTab tab = (TitleBarTab) sender;
 			CloseTab(tab);
@@ -824,7 +824,7 @@ namespace EasyTabs
 
 		/// <summary>Removes <paramref name="closingTab" /> from <see cref="Tabs" /> and selects the next applicable tab in the list.</summary>
 		/// <param name="closingTab">Tab that is being closed.</param>
-		protected virtual void CloseTab(TitleBarTab closingTab)
+		protected virtual bool CloseTab(TitleBarTab closingTab)
 		{
 			int removeIndex = Tabs.IndexOf(closingTab);
 			int selectedTabIndex = SelectedTabIndex;
@@ -861,6 +861,7 @@ namespace EasyTabs
 			{
 				Close();
 			}
+			return true;
 		}
 
 		private HT HitTest(Message m)
